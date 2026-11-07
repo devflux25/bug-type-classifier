@@ -73,3 +73,38 @@ print(f1_score(y_test, pred, average="macro"))
 from sklearn.metrics import classification_report
 print(classification_report(y_test, pred, zero_division=0))
 
+from sklearn.svm import LinearSVC
+from sklearn.naive_bayes import ComplementNB
+
+svc = LinearSVC(max_iter=5000, random_state=42)
+svc.fit(X_train_vec, y_train)
+pred_svc = svc.predict(X_test_vec)
+
+print(accuracy_score(y_test, pred_svc))
+print(f1_score(y_test, pred_svc, average="macro"))
+
+
+nb = ComplementNB()
+nb.fit(X_train_vec, y_train)
+pred_nb = nb.predict(X_test_vec)
+
+print(accuracy_score(y_test, pred_nb))
+print(f1_score(y_test, pred_nb, average="macro"))
+
+
+model1 = LogisticRegression(max_iter=1000, class_weight="balanced")
+model1.fit(X_train_vec, y_train)
+
+pred = model1.predict(X_test_vec)
+
+print(accuracy_score(y_test, pred))
+print(f1_score(y_test, pred, average="macro"))
+
+
+svc = LinearSVC(max_iter=5000, random_state=42, class_weight="balanced")
+svc.fit(X_train_vec, y_train)
+pred_svc = svc.predict(X_test_vec)
+
+print(accuracy_score(y_test, pred_svc))
+print(f1_score(y_test, pred_svc, average="macro"))
+
